@@ -80,7 +80,6 @@ class RedisServer extends events.EventEmitter {
     if (typeof source === 'number' || typeof source === 'string') {
       target.port = source;
 
-      return target;
     }
 
     if (source == null || typeof source !== 'object') {
@@ -94,7 +93,6 @@ class RedisServer extends events.EventEmitter {
     if (source.conf != null) {
       target.conf = source.conf;
 
-      return target;
     }
 
     if (source.replicaof != null) {
@@ -103,6 +101,10 @@ class RedisServer extends events.EventEmitter {
 
     if (source.port != null) {
       target.port = source.port;
+    }
+
+    if (source.sentinel != null) {
+      target.sentinel = source.sentinel;
     }
 
     return target;
