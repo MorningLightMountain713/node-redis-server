@@ -347,7 +347,8 @@ class RedisServer extends events.EventEmitter {
       bin: 'redis-server',
       conf: null,
       port: 6379,
-      replicaof: null
+      replicaof: null,
+      sentinel: false
     });
 
     /**
