@@ -6,7 +6,7 @@
  * @property {String} [bin=redis-server]
  * @property {String} [conf]
  * @property {(Number|String)} [port=6379]
- * @property {(String)} [slaveof]
+ * @property {(String)} [replicaof]
  */
 
 /**
@@ -96,8 +96,8 @@ class RedisServer extends events.EventEmitter {
       return target;
     }
 
-    if (source.slaveof != null) {
-      target.slaveof = source.slaveof;
+    if (source.replicaof != null) {
+      target.replicaof = source.replicaof;
     }
 
     if (source.port != null) {
@@ -114,18 +114,23 @@ class RedisServer extends events.EventEmitter {
    * @return {Array.<String>}
    */
   static parseFlags(config) {
+    const flags = [];
+
+    // ToDo: check if file exists
     if (config.conf != null) {
-      return [config.conf];
+      flags.push(config.conf);
     }
 
-    const flags = [];
+    if (config.sentinel != null) {
+      flags.push("--sentinel");
+    }
 
     if (config.port != null) {
       flags.push(`--port ${config.port}`);
     }
 
-    if (config.slaveof != null) {
-      flags.push(`--slaveof ${config.slaveof}`);
+    if (config.replicaof != null) {
+      flags.push(`--replicaof ${config.replicaof}`);
     }
 
     return flags;
@@ -339,7 +344,7 @@ class RedisServer extends events.EventEmitter {
       bin: 'redis-server',
       conf: null,
       port: 6379,
-      slaveof: null
+      replicaof: null
     });
 
     /**
