@@ -124,7 +124,7 @@ class RedisServer extends events.EventEmitter {
       flags.push(config.conf);
     }
 
-    if (config.sentinel != false) {
+    if (config.sentinel) {
       flags.push("--sentinel");
     }
 
