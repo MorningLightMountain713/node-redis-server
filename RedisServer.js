@@ -47,6 +47,7 @@ const PromiseQueue = require('promise-queue');
 const regExp = {
   terminalMessages: [
     /ready\s+to\s+accept/im,
+    /Sentinel\s+ID\s+is/im,
     /can't\s+set\s+maximum\s+open\s+files\s+to\s+\d+\s+because\s+of\s+OS\s+error/im,
     /already\s+in\s+use|not\s+listen|error|denied|can't/im
   ],
@@ -274,7 +275,6 @@ class RedisServer extends events.EventEmitter {
         };
 
         server.emit('opening');
-        console.log(RedisServer.parseFlags(server.config))
         server.process = childprocess.spawn(
           server.config.bin,
           RedisServer.parseFlags(server.config)
