@@ -274,7 +274,7 @@ class RedisServer extends events.EventEmitter {
         };
 
         server.emit('opening');
-
+        console.log(RedisServer.parseFlags(server.config))
         server.process = childprocess.spawn(
           server.config.bin,
           RedisServer.parseFlags(server.config)
