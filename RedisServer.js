@@ -8,6 +8,7 @@
  * @property {Boolean} [sentinel=false]
  * @property {(Number|String)} [port=6379]
  * @property {(String)} [replicaof]
+ * @property {(String)} [replicaPriority]
  */
 
 /**
@@ -108,6 +109,10 @@ class RedisServer extends events.EventEmitter {
       target.sentinel = source.sentinel;
     }
 
+    if (source.replicaPriority != null) {
+      target.replicaPriority = source.replicaPriority;
+    }
+
     return target;
   }
 
@@ -135,6 +140,10 @@ class RedisServer extends events.EventEmitter {
 
     if (config.replicaof != null) {
       flags.push(`--replicaof ${config.replicaof}`);
+    }
+
+    if (config.replicaPriority != null) {
+      flags.push(`--replica-priority ${config.replicaPriority}`);
     }
 
     return flags;
@@ -348,7 +357,8 @@ class RedisServer extends events.EventEmitter {
       conf: "",
       port: 6379,
       replicaof: null,
-      sentinel: false
+      sentinel: false,
+      replicaPriority: null,
     });
 
     /**
