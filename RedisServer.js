@@ -1,14 +1,6 @@
 'use strict';
 
-/**
- * Configuration options for a {@link RedisServer}.
- * @typedef {Object} RedisServer~Config
- * @property {String} [bin=redis-server]
- * @property {String} [conf=""]
- * @property {Boolean} [sentinel=false]
- * @property {(Number|String)} [port=6379]
- * @property {(String)} [replicaof]
- */
+
 
 /**
  * Invoked when an operation (i.e. {@link RedisServer#open}) completes.
