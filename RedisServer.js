@@ -120,7 +120,7 @@ class RedisServer extends events.EventEmitter {
     const flags = [];
 
     // ToDo: check if file exists
-    if (config.conf != null) {
+    if (config.conf) {
       flags.push(config.conf);
     }
 
