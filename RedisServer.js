@@ -345,7 +345,7 @@ class RedisServer extends events.EventEmitter {
      */
     this.config = RedisServer.parseConfig(configOrPort, {
       bin: 'redis-server',
-      conf: null,
+      conf: "",
       port: 6379,
       replicaof: null,
       sentinel: false
