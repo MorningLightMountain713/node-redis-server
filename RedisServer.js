@@ -76,7 +76,7 @@ class RedisServer extends events.EventEmitter {
     if (target == null) {
       target = Object.create(null);
     }
-    console.log(source)
+
     if (typeof source === 'number' || typeof source === 'string') {
       target.port = source;
 
