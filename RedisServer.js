@@ -103,7 +103,7 @@ class RedisServer extends events.EventEmitter {
       target.port = source.port;
     }
 
-    if (source.sentinel != null) {
+    if (source.sentinel) {
       target.sentinel = source.sentinel;
     }
 
