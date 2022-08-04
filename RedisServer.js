@@ -9,6 +9,7 @@
  * @property {(Number|String)} [port=6379]
  * @property {(String)} [replicaof]
  * @property {(String)} [replicaPriority]
+ * @property {Array} [modules]
  */
 
 /**
@@ -113,6 +114,10 @@ class RedisServer extends events.EventEmitter {
       target.replicaPriority = source.replicaPriority;
     }
 
+    if (source.modules != null) {
+      target.modules = source.modules;
+    }
+
     return target;
   }
 
@@ -144,6 +149,12 @@ class RedisServer extends events.EventEmitter {
 
     if (config.replicaPriority != null) {
       flags.push(`--replica-priority ${config.replicaPriority}`);
+    }
+
+    if (config.modules) {
+      for (let module of config.modules) {
+        flags.push(`--loadmodule ${module}`)
+      }
     }
 
     return flags;
@@ -359,6 +370,7 @@ class RedisServer extends events.EventEmitter {
       replicaof: null,
       sentinel: false,
       replicaPriority: null,
+      modules: [],
     });
 
     /**
