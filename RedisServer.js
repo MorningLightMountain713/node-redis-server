@@ -8,6 +8,8 @@
  * @property {Boolean} [sentinel=false]
  * @property {(Number|String)} [port=6379]
  * @property {(String)} [replicaof]
+ * @property {(Number|String)} [replicaAnnouncePort]
+ * @property {(Number|String)} [replicaAnnounceIp]
  * @property {(String)} [replicaPriority]
  * @property {Array} [modules]
  */
@@ -118,6 +120,14 @@ class RedisServer extends events.EventEmitter {
       target.modules = source.modules;
     }
 
+    if (source.replicaAnnouncePort != null) {
+      target.replicaAnnouncePort = source.replicaAnnouncePort;
+    }
+
+    if (source.replicaAnnounceIp != null) {
+      target.replicaAnnounceIp = source.replicaAnnounceIp;
+    }
+
     return target;
   }
 
@@ -155,6 +165,14 @@ class RedisServer extends events.EventEmitter {
       for (let module of config.modules) {
         flags.push(`--loadmodule ${module}`)
       }
+    }
+
+    if (config.replicaAnnouncePort) {
+      flags.push(`--replica-announce-port ${replicaAnnouncePort}`)
+    }
+
+    if (config.replicaAnnounceIp) {
+      flags.push(`--replica-announce-port ${replicaAnnounceIp}`)
     }
 
     return flags;
@@ -371,6 +389,8 @@ class RedisServer extends events.EventEmitter {
       sentinel: false,
       replicaPriority: null,
       modules: [],
+      replicaAnnouncePort: null,
+      replicaAnnounceIp: null,
     });
 
     /**
