@@ -185,6 +185,8 @@ class RedisServer extends events.EventEmitter {
    * @return {Object}
    */
   static parseData(string) {
+    // testing
+    console.log(string)
     const matches = regExp.terminalMessages
       .map((re) => re.exec(string))
       .find((m) => m !== null);
