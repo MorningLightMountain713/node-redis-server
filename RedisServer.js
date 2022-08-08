@@ -168,11 +168,11 @@ class RedisServer extends events.EventEmitter {
     }
 
     if (config.replicaAnnouncePort) {
-      flags.push(`--replica-announce-port ${replicaAnnouncePort}`)
+      flags.push(`--replica-announce-port ${config.replicaAnnouncePort}`)
     }
 
     if (config.replicaAnnounceIp) {
-      flags.push(`--replica-announce-ip ${replicaAnnounceIp}`)
+      flags.push(`--replica-announce-ip ${config.replicaAnnounceIp}`)
     }
 
     return flags;
